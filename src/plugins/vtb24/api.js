@@ -100,7 +100,7 @@ async function burlapRequest (options) {
       }
     })
   } catch (e) {
-    if (e.response && e.response.status === 503) {
+    if (e.response && (e.response.status === 503 || e.response.status === 500)) {
       throw new TemporaryError('Информация из Банка ВТБ временно недоступна. Повторите синхронизацию через некоторое время.\n\nЕсли ошибка будет повторяться, откройте Настройки синхронизации и нажмите "Отправить лог разработчикам".')
     } else if (e.cause) {
       throw e.cause
